@@ -1,10 +1,16 @@
 'use client';
 
 import React from 'react';
-import { Flame, MapPin, Phone, MessageSquare, Heart, Shield } from 'lucide-react';
+import { Flame, Shield } from 'lucide-react';
 import { RESTAURANT_INFO } from '@/data/menu';
+import { Language, Translations } from '@/lib/i18n';
 
-export function Footer() {
+interface FooterProps {
+  lang: Language;
+  t: Translations;
+}
+
+export function Footer({ lang, t }: FooterProps) {
   return (
     <footer className="bg-stone-950 border-t border-white/10 text-stone-400 text-xs py-12 pb-24 lg:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
@@ -15,41 +21,40 @@ export function Footer() {
               <div className="w-7 h-7 rounded-lg bg-amber-500 text-stone-950 flex items-center justify-center">
                 <Flame className="w-4 h-4 fill-current" />
               </div>
-              <span>Ali Baba Grill & Shawarma</span>
+              <span>{t.brandName} {t.brandTagline}</span>
             </div>
             <p className="text-stone-400 text-xs leading-relaxed max-w-sm">
-              Snack de quartier populaire à Safi, spécialisé dans les shawarmas croustillants, 
-              les sandwiches généreux et les grillades au feu de braise à prix accessibles (1 à 50 MAD).
+              {t.footerDesc}
             </p>
             <div className="text-stone-500 text-[11px] pt-1">
-              Plateau, Boulevard Kennedy · Safi 46000, Maroc
+              {lang === 'ar' ? 'شارع كينيدي، حي البلاطو · أسفي 46000، المغرب' : 'Plateau, Boulevard Kennedy · Safi 46000, Maroc'}
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="md:col-span-3 space-y-2">
             <h4 className="text-xs font-bold uppercase tracking-wider text-stone-200">
-              Navigation
+              {t.footerNavTitle}
             </h4>
             <ul className="space-y-1.5 text-xs">
               <li>
                 <a href="#specialties" className="hover:text-amber-400 transition-colors">
-                  Spécialités Signature
+                  {t.navSpecialties}
                 </a>
               </li>
               <li>
                 <a href="#menu" className="hover:text-amber-400 transition-colors">
-                  Menu Complet & Tarifs
+                  {t.navMenu}
                 </a>
               </li>
               <li>
                 <a href="#story" className="hover:text-amber-400 transition-colors">
-                  Notre Histoire à Safi
+                  {t.navStory}
                 </a>
               </li>
               <li>
                 <a href="#location" className="hover:text-amber-400 transition-colors">
-                  Horaires d’Ouverture & Accès
+                  {t.navLocation}
                 </a>
               </li>
             </ul>
@@ -58,20 +63,20 @@ export function Footer() {
           {/* Direct Ordering & Contact */}
           <div className="md:col-span-4 space-y-2">
             <h4 className="text-xs font-bold uppercase tracking-wider text-stone-200">
-              Commandes & Renseignements
+              {t.footerOrdersTitle}
             </h4>
             <p className="text-xs text-stone-400">
-              Pour vos commandes à emporter ou réservations de groupe :
+              {t.footerOrdersPrompt}
             </p>
             <div className="space-y-1.5 pt-1 text-xs">
               <div>
-                Téléphone :{' '}
+                {t.footerPhoneLabel}{' '}
                 <a href={`tel:${RESTAURANT_INFO.phoneRaw}`} className="text-stone-200 hover:text-amber-400 font-semibold tabular-nums">
                   {RESTAURANT_INFO.phoneDisplay}
                 </a>
               </div>
               <div>
-                WhatsApp :{' '}
+                {t.footerWhatsAppLabel}{' '}
                 <a 
                   href={`https://wa.me/${RESTAURANT_INFO.whatsappRaw}`} 
                   target="_blank" 
@@ -82,7 +87,7 @@ export function Footer() {
                 </a>
               </div>
               <div className="text-stone-400">
-                Horaires : Tous les jours de 11h30 à 01h00
+                {t.footerHoursLabel} {t.footerHoursVal}
               </div>
             </div>
           </div>
@@ -93,17 +98,17 @@ export function Footer() {
           <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/5 flex items-start gap-3 text-[11px] text-stone-400 leading-relaxed">
             <Shield className="w-4 h-4 text-amber-500/80 shrink-0 mt-0.5" />
             <div>
-              <strong className="text-stone-300">Avertissement Portfolio Indépendant :</strong>{' '}
-              Ce projet web est un concept de portfolio indépendant inspiré par le contexte culinaire local d’un snack populaire à Safi, Maroc. Il n’est pas affilié, commandité, approuvé ni rattaché commercialement à l’entreprise référencée.
+              <strong className="text-stone-300">{t.footerDisclaimerTitle}</strong>{' '}
+              {t.footerDisclaimerText}
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-stone-500 pt-2">
             <div>
-              &copy; {new Date().getFullYear()} Ali Baba Grill & Shawarma — Concept Portfolio Indépendant.
+              &copy; {new Date().getFullYear()} {t.footerCopyright}
             </div>
             <div className="flex items-center gap-1 text-stone-400">
-              <span>Conçu avec passion pour la gastronomie de rue à Safi</span>
+              <span>{t.footerMadeWithLove}</span>
             </div>
           </div>
         </div>

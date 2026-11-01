@@ -1,14 +1,17 @@
 'use client';
 
 import React from 'react';
-import { ShoppingBag, Phone, ChevronRight } from 'lucide-react';
+import { ShoppingBag, Phone, ChevronRight, ChevronLeft } from 'lucide-react';
 import { RESTAURANT_INFO } from '@/data/menu';
+import { Language, Translations } from '@/lib/i18n';
 
 interface StickyMobileBarProps {
   cartItemCount: number;
   cartTotal: number;
   onOpenCart: () => void;
   onScrollToMenu: () => void;
+  lang: Language;
+  t: Translations;
 }
 
 export function StickyMobileBar({
@@ -16,8 +19,11 @@ export function StickyMobileBar({
   cartTotal,
   onOpenCart,
   onScrollToMenu,
+  lang,
+  t,
 }: StickyMobileBarProps) {
-  // Respect the 15% sticky height cap: compact height ~56px
+  const isRtl = lang === 'ar';
+
   return (
     <aside 
       aria-label="Actions rapides pour mobile"
@@ -33,12 +39,16 @@ export function StickyMobileBar({
               <div className="w-7 h-7 rounded-lg bg-stone-950 text-amber-400 flex items-center justify-center text-xs font-black tabular-nums">
                 {cartItemCount}
               </div>
-              <span className="font-extrabold tracking-tight">Voir la commande</span>
+              <span className="font-extrabold tracking-tight">{t.mobileViewOrder}</span>
             </div>
 
             <div className="flex items-center gap-1.5 font-black tabular-nums">
-              <span>{cartTotal} MAD</span>
-              <ChevronRight className="w-4 h-4 stroke-[2.5]" />
+              <span>{cartTotal} {lang === 'ar' ? 'درهم' : 'MAD'}</span>
+              {isRtl ? (
+                <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
+              ) : (
+                <ChevronRight className="w-4 h-4 stroke-[2.5]" />
+              )}
             </div>
           </button>
         ) : (
@@ -48,7 +58,7 @@ export function StickyMobileBar({
               className="h-11 rounded-xl bg-amber-400 text-stone-950 font-bold text-xs flex items-center justify-center gap-1.5 active:scale-[0.98] transition-all cursor-pointer"
             >
               <ShoppingBag className="w-3.5 h-3.5" />
-              <span>Commander (1-50 DH)</span>
+              <span>{t.mobileOrderCta}</span>
             </button>
 
             <a
@@ -56,7 +66,7 @@ export function StickyMobileBar({
               className="h-11 rounded-xl bg-white/10 text-white font-semibold text-xs flex items-center justify-center gap-1.5 border border-white/10 active:scale-[0.98] transition-all"
             >
               <Phone className="w-3.5 h-3.5 text-amber-400" />
-              <span>Appeler le Snack</span>
+              <span>{t.mobileCallSnack}</span>
             </a>
           </div>
         )}

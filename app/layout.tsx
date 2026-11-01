@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans } from 'next/font/google';
+import { Plus_Jakarta_Sans, Cairo } from 'next/font/google';
 import './globals.css';
 
 const jakarta = Plus_Jakarta_Sans({
@@ -8,8 +8,14 @@ const jakarta = Plus_Jakarta_Sans({
   variable: '--font-jakarta',
 });
 
+const cairo = Cairo({
+  subsets: ['arabic', 'latin'],
+  display: 'swap',
+  variable: '--font-cairo',
+});
+
 export const metadata: Metadata = {
-  title: 'Ali Baba Grill & Shawarma | Snack Populaire à Safi (1–50 MAD)',
+  title: 'Ali Baba Grill & Shawarma | Snack Populaire à Safi (1–50 MAD) - علي بابا أسفي',
   description: 'Independent portfolio concept for a popular neighborhood snack restaurant offering specialty shawarma, loaded sandwiches, traditional platters, and fast takeaway in Safi, Morocco.',
   openGraph: {
     title: 'Ali Baba Grill & Shawarma | Snack Populaire à Safi',
@@ -30,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={jakarta.variable}>
+    <html lang="fr" className={`${jakarta.variable} ${cairo.variable}`}>
       <body className="min-h-screen bg-[#0c0d10] text-stone-100 antialiased font-sans selection:bg-amber-500 selection:text-black" suppressHydrationWarning>
         {children}
       </body>

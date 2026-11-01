@@ -1,30 +1,43 @@
 import { MenuItem } from '@/types/restaurant';
 
-export const BREAD_OPTIONS = [
-  'Pain Pita Libanais Chaud',
-  'Batbout Artisanal Marocain',
-  'Baguette Croustillante',
-  'Galette Tacos Tortilla',
+export const BREAD_OPTIONS_DETAILED = [
+  { id: 'pita', nameFr: 'Pain Pita Libanais Chaud', nameAr: 'خبز بيتا لبناني ساخن' },
+  { id: 'batbout', nameFr: 'Batbout Artisanal Marocain', nameAr: 'بطبوط بلدي مغربي طازج' },
+  { id: 'baguette', nameFr: 'Baguette Croustillante', nameAr: 'خبز باجيت مقرمش' },
+  { id: 'tortilla', nameFr: 'Galette Tacos Tortilla', nameAr: 'خبز تورتيلا طاكوس محمص' },
 ];
 
-export const SAUCE_OPTIONS = [
-  { id: 'algerienne', name: 'Sauce Algérienne', isSpicy: true },
-  { id: 'samourai', name: 'Sauce Samouraï (Pimentée)', isSpicy: true },
-  { id: 'blanche', name: 'Sauce Blanche à l\'Ail (Toum)', isSpicy: false },
-  { id: 'harissa', name: 'Harissa Maison de Safi', isSpicy: true },
-  { id: 'mayo_ketchup', name: 'Mayo & Ketchup Classique', isSpicy: false },
-  { id: 'barbecue', name: 'Sauce Barbecue Fumée', isSpicy: false },
-  { id: 'andalouse', name: 'Sauce Andalouse', isSpicy: false },
+export const BREAD_OPTIONS = BREAD_OPTIONS_DETAILED.map((b) => b.nameFr);
+
+export const SAUCE_OPTIONS_DETAILED = [
+  { id: 'algerienne', nameFr: 'Sauce Algérienne', nameAr: 'صلصة جزائرية', isSpicy: true },
+  { id: 'samourai', nameFr: 'Sauce Samouraï (Pimentée)', nameAr: 'صلصة ساموراي حارة', isSpicy: true },
+  { id: 'blanche', nameFr: 'Sauce Blanche à l\'Ail (Toum)', nameAr: 'صلصة ثومية بيضاء (توم)', isSpicy: false },
+  { id: 'harissa', nameFr: 'Harissa Maison de Safi', nameAr: 'هريسة منزلية حارة بأسفي', isSpicy: true },
+  { id: 'mayo_ketchup', nameFr: 'Mayo & Ketchup Classique', nameAr: 'مايونيز وكاتشب كلاسيكي', isSpicy: false },
+  { id: 'barbecue', nameFr: 'Sauce Barbecue Fumée', nameAr: 'صلصة باربكيو مدخنة', isSpicy: false },
+  { id: 'andalouse', nameFr: 'Sauce Andalouse', nameAr: 'صلصة أندلسية', isSpicy: false },
 ];
 
-export const EXTRA_OPTIONS = [
-  { name: 'Supplément Fromage Fondu Cheddar', price: 4 },
-  { name: 'Portion Frites intégrée dans sandwich', price: 3 },
-  { name: 'Œuf au plat doré à la plancha', price: 3 },
-  { name: 'Double Viande / Extra Shawarma', price: 10 },
-  { name: 'Bacon de Bœuf Halal croustillant', price: 5 },
-  { name: 'Ramequin Sauce Extra', price: 2 },
+export const SAUCE_OPTIONS = SAUCE_OPTIONS_DETAILED.map((s) => ({
+  id: s.id,
+  name: s.nameFr,
+  isSpicy: s.isSpicy,
+}));
+
+export const EXTRA_OPTIONS_DETAILED = [
+  { id: 'cheddar', nameFr: 'Supplément Fromage Fondu Cheddar', nameAr: 'إضافة جبن شيدر ذائب', price: 4 },
+  { id: 'frites', nameFr: 'Portion Frites intégrée dans sandwich', nameAr: 'إضافة بطاطس مقلية داخل السندويتش', price: 3 },
+  { id: 'oeuf', nameFr: 'Œuf au plat doré à la plancha', nameAr: 'بيضة مقلية على البلانشا', price: 3 },
+  { id: 'double_viande', nameFr: 'Double Viande / Extra Shawarma', nameAr: 'مضاعفة اللحم / شاورما إضافية', price: 10 },
+  { id: 'bacon', nameFr: 'Bacon de Bœuf Halal croustillant', nameAr: 'بسطرمة / بيكون بقري حلال مقرمش', price: 5 },
+  { id: 'sauce_extra', nameFr: 'Ramequin Sauce Extra', nameAr: 'كوب صلصة إضافي', price: 2 },
 ];
+
+export const EXTRA_OPTIONS = EXTRA_OPTIONS_DETAILED.map((e) => ({
+  name: e.nameFr,
+  price: e.price,
+}));
 
 export const MENU_ITEMS: MenuItem[] = [
   // --- Signature Shawarma ---
@@ -512,13 +525,13 @@ export const RESTAURANT_INFO = {
   whatsappRaw: '212661458820',
   googleMapsUrl: 'https://maps.google.com/?q=Safi+Morocco+Boulevard+Kennedy',
   openingHours: [
-    { day: 'Lundi', hours: '11:30 – 01:00', isOpen: true },
-    { day: 'Mardi', hours: '11:30 – 01:00', isOpen: true },
-    { day: 'Mercredi', hours: '11:30 – 01:00', isOpen: true },
-    { day: 'Jeudi', hours: '11:30 – 01:00', isOpen: true },
-    { day: 'Vendredi', hours: '14:30 – 01:30', isOpen: true },
-    { day: 'Samedi', hours: '11:30 – 01:30', isOpen: true },
-    { day: 'Dimanche', hours: '11:30 – 01:00', isOpen: true },
+    { day: 'Lundi', dayAr: 'الإثنين', hours: '11:30 – 01:00', isOpen: true },
+    { day: 'Mardi', dayAr: 'الثلاثاء', hours: '11:30 – 01:00', isOpen: true },
+    { day: 'Mercredi', dayAr: 'الأربعاء', hours: '11:30 – 01:00', isOpen: true },
+    { day: 'Jeudi', dayAr: 'الخميس', hours: '11:30 – 01:00', isOpen: true },
+    { day: 'Vendredi', dayAr: 'الجمعة', hours: '14:30 – 01:30', isOpen: true },
+    { day: 'Samedi', dayAr: 'السبت', hours: '11:30 – 01:30', isOpen: true },
+    { day: 'Dimanche', dayAr: 'الأحد', hours: '11:30 – 01:00', isOpen: true },
   ],
   services: [
     { label: 'Sur Place', icon: 'UtensilsCrossed', desc: 'Salle climatisée & terrasse conviviale' },

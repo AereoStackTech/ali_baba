@@ -3,14 +3,17 @@
 import React from 'react';
 import { MenuItem } from '@/types/restaurant';
 import { Plus, Flame, Sparkles, Utensils, Crown, Layers } from 'lucide-react';
+import { Language, Translations } from '@/lib/i18n';
 
 interface MenuCardProps {
   item: MenuItem;
   onSelect: (item: MenuItem) => void;
   onQuickAdd: (item: MenuItem) => void;
+  lang: Language;
+  t: Translations;
 }
 
-export function MenuCard({ item, onSelect, onQuickAdd }: MenuCardProps) {
+export function MenuCard({ item, onSelect, onQuickAdd, lang, t }: MenuCardProps) {
   const getIcon = () => {
     switch (item.iconName) {
       case 'Flame': return <Flame className="w-4 h-4 text-amber-400" />;
@@ -20,6 +23,10 @@ export function MenuCard({ item, onSelect, onQuickAdd }: MenuCardProps) {
       default: return <Utensils className="w-4 h-4 text-amber-400" />;
     }
   };
+
+  const displayName = lang === 'ar' ? (item.nameAr || item.name) : item.name;
+  const subName = lang === 'ar' ? item.name : item.nameAr;
+  const displayDesc = lang === 'ar' ? (item.descriptionAr || item.description) : item.description;
 
   return (
     <article className="group flex flex-col justify-between p-5 rounded-2xl bg-stone-900/70 hover:bg-stone-900/90 border border-white/[0.08] hover:border-amber-500/40 transition-all duration-200 shadow-sm hover:shadow-lg hover:shadow-amber-950/20">
@@ -42,20 +49,20 @@ export function MenuCard({ item, onSelect, onQuickAdd }: MenuCardProps) {
             </div>
             {item.isSpecialty ? (
               <span className="text-[11px] font-semibold text-amber-300 bg-stone-950/80 backdrop-blur-md px-2 py-0.5 rounded border border-amber-500/30">
-                Spécialité Safi
+                {t.badgeSpecialty}
               </span>
             ) : item.isPopular ? (
               <span className="text-[11px] font-semibold text-stone-200 bg-stone-950/80 backdrop-blur-md px-2 py-0.5 rounded border border-white/20">
-                Populaire
+                {t.badgePopular}
               </span>
             ) : null}
           </div>
 
-          {/* Bottom row: Arabic dish name */}
+          {/* Bottom row: Alternate title subtitle */}
           <div className="relative z-10 text-right">
-            {item.nameAr && (
-              <span className="text-xs font-medium text-stone-200/90 drop-shadow-sm font-sans" dir="rtl">
-                {item.nameAr}
+            {subName && (
+              <span className="text-xs font-medium text-stone-200/90 drop-shadow-sm">
+                {subName}
               </span>
             )}
           </div>
@@ -65,15 +72,15 @@ export function MenuCard({ item, onSelect, onQuickAdd }: MenuCardProps) {
         <div className="space-y-1.5">
           <div className="flex items-start justify-between gap-3">
             <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-amber-400 transition-colors leading-snug">
-              {item.name}
+              {displayName}
             </h3>
             <span className="text-lg font-extrabold text-amber-400 tabular-nums shrink-0 whitespace-nowrap">
-              {item.price} <span className="text-xs font-semibold text-amber-500/80">MAD</span>
+              {item.price} <span className="text-xs font-semibold text-amber-500/80">{lang === 'ar' ? 'درهم' : 'MAD'}</span>
             </span>
           </div>
 
           <p className="text-xs sm:text-sm text-stone-400 line-clamp-2 leading-relaxed">
-            {item.description}
+            {displayDesc}
           </p>
         </div>
 
@@ -97,17 +104,17 @@ export function MenuCard({ item, onSelect, onQuickAdd }: MenuCardProps) {
           onClick={() => onSelect(item)}
           className="flex-1 py-2 px-3 text-xs font-semibold text-stone-200 hover:text-white bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 transition-colors text-center cursor-pointer"
         >
-          Personnaliser
+          {t.btnCustomize}
         </button>
 
         <button
           onClick={() => onQuickAdd(item)}
           className="p-2 sm:px-3 sm:py-2 text-xs font-bold text-stone-950 bg-amber-400 hover:bg-amber-300 rounded-lg transition-colors flex items-center justify-center gap-1 cursor-pointer shrink-0"
-          title={`Ajouter ${item.name} au panier`}
-          aria-label={`Ajouter ${item.name} au panier`}
+          title={`${t.btnAdd} ${displayName}`}
+          aria-label={`${t.btnAdd} ${displayName}`}
         >
           <Plus className="w-4 h-4 stroke-[2.5]" />
-          <span className="hidden sm:inline">Ajouter</span>
+          <span className="hidden sm:inline">{t.btnAdd}</span>
         </button>
       </div>
     </article>
