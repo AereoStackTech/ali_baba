@@ -1,0 +1,6 @@
+{
+  "name": "Ali Baba Grill & Shawarma",
+  "description": "Independent portfolio concept for a popular neighborhood snack restaurant offering specialty shawarma, loaded sandwiches, traditional platters, and fast takeaway in Safi, Morocco.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
